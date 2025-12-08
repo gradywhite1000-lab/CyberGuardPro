@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberGuard Pro | Cybersecurity Made Simple</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="tailwind.config.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="font-sans text-slate-800 bg-slate-50 flex flex-col min-h-screen">
+
+    <div id="toast-container" class="bg-brand-dark text-white px-6 py-4 rounded-lg shadow-2xl flex items-center space-x-3 min-w-[300px]">
+        <i class="fa-solid fa-circle-check text-brand-success text-xl"></i>
+        <div>
+            <h4 class="font-bold text-sm">Success!</h4>
+            <p class="text-xs text-gray-300" id="toast-message">Operation completed successfully.</p>
+        </div>
+    </div>
+
+    <nav class="bg-brand-dark text-white sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateTo('home')">
+                    <i class="fa-solid fa-shield-halved text-brand-accent text-3xl"></i>
+                    <div class="leading-tight">
+                        <h1 class="text-xl font-bold tracking-wider">CYBER GUARD PRO</h1>
+                        <span class="text-xs text-gray-400 uppercase tracking-widest">Secure Your Future</span>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex space-x-8 text-sm font-medium items-center">
+                    <a href="#" onclick="navigateTo('home')" class="nav-item hover:text-brand-accent transition py-2">Home</a>
+                    
+                    <div class="relative group py-2">
+                        <button onclick="navigateTo('about')" class="nav-item hover:text-brand-accent transition flex items-center">
+                            About Us <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+                        </button>
+                        <div class="absolute hidden group-hover:block bg-slate-800 text-white shadow-xl mt-2 rounded-lg w-48 py-2 border border-slate-700 left-0">
+                            <a href="#" onclick="navigateTo('about', 'team-section')" class="block px-4 py-2 hover:bg-slate-700 text-sm hover:text-brand-accent transition">Executive Team</a>
+                            <a href="#" onclick="navigateTo('careers')" class="block px-4 py-2 hover:bg-slate-700 text-sm hover:text-brand-accent transition">Careers</a>
+                        </div>
+                    </div>
+
+                    <div class="relative group py-2">
+                        <button onclick="navigateTo('services')" class="nav-item hover:text-brand-accent transition flex items-center">
+                            Services & Pricing <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+                        </button>
+                        <div class="absolute hidden group-hover:block bg-slate-800 text-white shadow-xl mt-2 rounded-lg w-56 py-2 border border-slate-700 left-0">
+                            <a href="#" onclick="navigateTo('services', 'service-personal')" class="block px-4 py-2 hover:bg-slate-700 text-sm hover:text-brand-accent transition">Personal Security</a>
+                            <a href="#" onclick="navigateTo('services', 'service-smb')" class="block px-4 py-2 hover:bg-slate-700 text-sm hover:text-brand-accent transition">SMB Protection</a>
+                            <a href="#" onclick="navigateTo('services', 'service-enterprise')" class="block px-4 py-2 hover:bg-slate-700 text-sm hover:text-brand-accent transition">Enterprise Solutions</a>
+                            <a href="#" onclick="navigateTo('quote')" class="block px-4 py-2 hover:bg-slate-700 text-sm hover:text-brand-accent transition border-t border-slate-700 mt-1 pt-2">Get a Quote</a>
+                        </div>
+                    </div>
+
+                    <div class="relative group py-2">
+                        <button onclick="navigateTo('resources')" class="nav-item hover:text-brand-accent transition flex items-center">
+                            Resources <i class="fa-solid fa-chevron-down ml-1 text-xs"></i>
+                        </button>
+                        <div class="absolute hidden group-hover:block bg-slate-800 text-white shadow-xl mt-2 rounded-lg w-48 py-2 border border-slate-700 left-0">
+                            <a href="#" onclick="navigateTo('quiz')" class="block px-4 py-2 hover:bg-slate-700 text-sm hover:text-brand-accent transition">Free Security Quiz</a>
+                            <a href="#" onclick="navigateTo('resources', 'latest-threats')" class="block px-4 py-2 hover:bg-slate-700 text-sm hover:text-brand-accent transition">Latest Threats</a>
+                        </div>
+                    </div>
+
+                    <a href="#" onclick="navigateTo('contact')" class="nav-item hover:text-brand-accent transition py-2">Contact</a>
+                </div>
+
+                <div class="hidden md:block">
+                    <button onclick="navigateTo('quiz')" class="bg-brand-primary hover:bg-blue-600 text-white px-5 py-2 rounded-full font-bold transition shadow-lg transform hover:scale-105">
+                        Free Security Check
+                    </button>
+                </div>
+
+                <div class="md:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-white text-2xl focus:outline-none">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-800 pb-4">
+            <a href="#" onclick="navigateTo('home'); toggleMobileMenu()" class="block py-2 px-4 hover:bg-slate-700">Home</a>
+            <a href="#" onclick="navigateTo('about'); toggleMobileMenu()" class="block py-2 px-4 hover:bg-slate-700">About Us</a>
+            <a href="#" onclick="navigateTo('services'); toggleMobileMenu()" class="block py-2 px-4 hover:bg-slate-700">Services</a>
+            <a href="#" onclick="navigateTo('quiz'); toggleMobileMenu()" class="block py-2 px-4 hover:bg-slate-700">Free Assessment</a>
+            <a href="#" onclick="navigateTo('contact'); toggleMobileMenu()" class="block py-2 px-4 hover:bg-slate-700">Contact</a>
+            <a href="#" onclick="navigateTo('careers'); toggleMobileMenu()" class="block py-2 px-4 hover:bg-slate-700">Careers</a>
+        </div>
+    </nav>
+
+    <main class="flex-grow">
+
+        <section id="home" class="page-section active">
+            <div class="bg-brand-dark text-white relative overflow-hidden">
+                <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+                <div class="container mx-auto px-4 py-24 flex flex-col md:flex-row items-center relative z-10">
+                    <div class="md:w-1/2 mb-10 md:mb-0">
+                        <span class="bg-blue-900 text-blue-200 text-xs font-bold px-3 py-1 rounded-full mb-4 inline-block">ISO 27001 COMPLIANT</span>
+                        <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">Cybersecurity Made <span class="text-brand-accent">Simple.</span> Trusted by All.</h1>
+                        <p class="text-lg text-gray-300 mb-8 max-w-lg">Protect your family, business, and data without the tech headache. We monitor your network 24/7 so you can focus on growing your business.</p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="navigateTo('quiz')" class="bg-brand-primary hover:bg-blue-600 text-white px-8 py-3 rounded-lg font-bold text-lg shadow-lg transition">
+                                Start Free Assessment
+                            </button>
+                            <button onclick="navigateTo('services')" class="bg-transparent border-2 border-white hover:bg-white hover:text-brand-dark text-white px-8 py-3 rounded-lg font-bold text-lg transition">
+                                View Plans
+                            </button>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center">
+                        <i class="fa-solid fa-shield-virus text-9xl text-brand-accent opacity-80 animate-pulse"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mx-auto px-4 py-16">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="p-8 bg-white rounded-xl shadow-md hover:shadow-xl transition border-t-4 border-brand-primary">
+                        <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fa-solid fa-clock text-2xl text-brand-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">24/7 Monitoring</h3>
+                        <p class="text-gray-600">We watch your network constantly. Threats don't sleep, and neither do our security analysts.</p>
+                    </div>
+                    <div class="p-8 bg-white rounded-xl shadow-md hover:shadow-xl transition border-t-4 border-brand-primary">
+                        <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fa-solid fa-wallet text-2xl text-brand-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Clear Pricing</h3>
+                        <p class="text-gray-600">No hidden fees. Tiered packages designed specifically for personal use and small businesses.</p>
+                    </div>
+                    <div class="p-8 bg-white rounded-xl shadow-md hover:shadow-xl transition border-t-4 border-brand-primary">
+                        <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fa-solid fa-user-graduate text-2xl text-brand-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Expert Team</h3>
+                        <p class="text-gray-600">Our team includes certified Threat Hunters and Incident Response Analysts ready to help.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 py-16 border-t border-slate-200">
+                <div class="container mx-auto px-4 max-w-3xl">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl font-bold text-brand-dark">Frequently Asked Questions</h2>
+                        <p class="text-gray-500 mt-2">Common questions about keeping your business safe.</p>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                            <button onclick="toggleFaq(this)" class="w-full text-left px-6 py-4 flex justify-between items-center font-bold text-gray-800 hover:bg-gray-50 transition">
+                                Why do small businesses need cybersecurity?
+                                <i class="fa-solid fa-chevron-down text-gray-400 transition-transform"></i>
+                            </button>
+                            <div class="faq-answer bg-slate-50 px-6">
+                                <p class="py-4 text-sm text-gray-600">Small businesses are actually the #1 target for cybercriminals because they often have valuable data but fewer defenses than large corporations. 60% of small businesses that suffer a data breach close within 6 months.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                            <button onclick="toggleFaq(this)" class="w-full text-left px-6 py-4 flex justify-between items-center font-bold text-gray-800 hover:bg-gray-50 transition">
+                                How does the pricing model work?
+                                <i class="fa-solid fa-chevron-down text-gray-400 transition-transform"></i>
+                            </button>
+                            <div class="faq-answer bg-slate-50 px-6">
+                                <p class="py-4 text-sm text-gray-600">We offer a transparent subscription model. You pay a flat monthly fee per device or per user. There are no hidden "setup" fees for our standard plans. You can cancel anytime.</p>
+                            </div>
+                        </div>
+
+                         <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                            <button onclick="toggleFaq(this)" class="w-full text-left px-6 py-4 flex justify-between items-center font-bold text-gray-800 hover:bg-gray-50 transition">
+                                What happens if I get hacked while using CyberGuard?
+                                <i class="fa-solid fa-chevron-down text-gray-400 transition-transform"></i>
+                            </button>
+                            <div class="faq-answer bg-slate-50 px-6">
+                                <p class="py-4 text-sm text-gray-600">Our Incident Response team is on standby 24/7. If a breach occurs, we immediately isolate the threat, remove the attacker, and help you recover your data. We also help with the legal reporting requirements.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-200 py-12">
+                <div class="container mx-auto px-4 text-center">
+                    <h2 class="text-2xl font-bold mb-8 text-slate-600">The Reality of Cyber Threats</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div>
+                            <p class="text-4xl font-bold text-brand-dark mb-2">$109B</p>
+                            <p class="text-sm text-gray-600">Projected Global Spending by 2026</p>
+                        </div>
+                        <div>
+                            <p class="text-4xl font-bold text-red-600 mb-2">60%</p>
+                            <p class="text-sm text-gray-600">Of SMBs shut down after a breach</p>
+                        </div>
+                        <div>
+                            <p class="text-4xl font-bold text-brand-dark mb-2">100%</p>
+                            <p class="text-sm text-gray-600">Commitment to your safety</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="page-section">
+            <div class="bg-white py-16">
+                <div class="container mx-auto px-4">
+                    <div class="max-w-3xl mx-auto text-center mb-16">
+                        <h2 class="text-3xl font-bold text-brand-dark mb-4">Who Is CyberGuard Pro?</h2>
+                        <div class="h-1 w-20 bg-brand-primary mx-auto mb-6"></div>
+                        <div id="mission-section">
+                            <p class="text-lg text-gray-600 leading-relaxed">
+                                CyberGuard Pro is a premier cybersecurity firm safeguarding businesses and individuals from the evolving landscape of digital threats. Our goal is to create a clean, professional, and accessible environment that simplifies cybersecurity concepts for small business owners.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3 id="team-section" class="text-2xl font-bold text-center mb-10 pt-10">Meet Our Executive Team</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                        <div class="bg-slate-50 p-6 rounded-lg shadow text-center hover:shadow-lg transition">
+                            <div class="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center text-3xl text-gray-500 overflow-hidden">
+                                <i class="fa-solid fa-user-tie"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-brand-dark">Sarah Jenkins, CISSP</h4>
+                            <p class="text-brand-primary font-medium mb-2">Chief Executive Officer</p>
+                            <p class="text-sm text-gray-500">Former DoD analyst with 15+ years protecting critical infrastructure.</p>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-lg shadow text-center hover:shadow-lg transition">
+                            <div class="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center text-3xl text-gray-500 overflow-hidden">
+                                <i class="fa-solid fa-user-shield"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-brand-dark">David Chen</h4>
+                            <p class="text-brand-primary font-medium mb-2">Director of Threat Intel</p>
+                            <p class="text-sm text-gray-500">Expert in ransomware negotiation and forensic data recovery.</p>
+                        </div>
+                        <div class="bg-slate-50 p-6 rounded-lg shadow text-center hover:shadow-lg transition">
+                            <div class="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center text-3xl text-gray-500 overflow-hidden">
+                                <i class="fa-solid fa-user-gear"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-brand-dark">Elena Rodriguez</h4>
+                            <p class="text-brand-primary font-medium mb-2">Head of Operations</p>
+                            <p class="text-sm text-gray-500">Specializes in SMB compliance (HIPAA, SOC2) and risk management.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="page-section">
+            <div class="bg-slate-100 py-16">
+                <div class="container mx-auto px-4">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold text-brand-dark">Transparent Pricing Plans</h2>
+                        <p class="text-gray-600 mt-2">Choose the protection level that fits your needs.</p>
+                    </div>
+
+                    <div class="flex justify-center mb-12">
+                        <div class="bg-white p-1 rounded-full shadow-sm inline-flex">
+                            <button id="btn-monthly" onclick="setPricing('monthly')" class="pricing-toggle active px-6 py-2 rounded-full font-bold text-sm transition">Monthly</button>
+                            <button id="btn-annual" onclick="setPricing('annual')" class="pricing-toggle inactive px-6 py-2 rounded-full font-bold text-sm transition">Annual (Save 20%)</button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        <div id="service-personal" class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 scroll-mt-24">
+                            <h3 class="text-xl font-bold text-gray-800">Personal</h3>
+                            <p class="text-gray-500 text-sm mb-6">Essential protection for individuals.</p>
+                            <div class="text-4xl font-bold text-brand-dark mb-6">$<span id="price-personal">19</span><span class="text-lg text-gray-400 font-normal">/mo</span></div>
+                            <ul class="space-y-3 mb-8 text-sm text-gray-600">
+                                <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> Antivirus & Malware Protection</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> Scam Detection</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> 1 Device</li>
+                            </ul>
+                            <button onclick="navigateTo('contact')" class="w-full py-3 border-2 border-brand-primary text-brand-primary font-bold rounded-lg hover:bg-brand-primary hover:text-white transition">Get Started</button>
+                        </div>
+
+                        <div id="service-smb" class="bg-white rounded-2xl shadow-xl p-8 border-t-8 border-brand-primary transform md:-translate-y-4 scroll-mt-24">
+                            <div class="uppercase tracking-wide text-xs font-bold text-brand-primary mb-2">Most Popular</div>
+                            <h3 class="text-2xl font-bold text-gray-800">Small Business</h3>
+                            <p class="text-gray-500 text-sm mb-6">Complete security for growing teams.</p>
+                            <div class="text-5xl font-bold text-brand-dark mb-6">$<span id="price-business">49</span><span class="text-lg text-gray-400 font-normal">/mo</span></div>
+                            <ul class="space-y-4 mb-8 text-sm text-gray-600">
+                                <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> <span class="font-bold">24/7 Threat Monitoring</span></li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> Ransomware Protection</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> Up to 10 Devices</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> Email Phishing Shield</li>
+                            </ul>
+                            <button onclick="navigateTo('quote')" class="w-full py-3 bg-brand-primary text-white font-bold rounded-lg hover:bg-blue-600 transition shadow-lg">Get Custom Quote</button>
+                        </div>
+
+                        <div id="service-enterprise" class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 scroll-mt-24">
+                            <h3 class="text-xl font-bold text-gray-800">Corporate</h3>
+                            <p class="text-gray-500 text-sm mb-6">Advanced defense for large orgs.</p>
+                            <div class="text-4xl font-bold text-brand-dark mb-6">Custom</div>
+                            <ul class="space-y-3 mb-8 text-sm text-gray-600">
+                                <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> Supply Chain Attack Prevention</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> Insider Threat Detection</li>
+                                <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> Dedicated Security Analyst</li>
+                            </ul>
+                            <button onclick="navigateTo('contact')" class="w-full py-3 border-2 border-brand-dark text-brand-dark font-bold rounded-lg hover:bg-brand-dark hover:text-white transition">Contact Sales</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="quiz" class="page-section">
+            <div class="bg-brand-dark min-h-screen py-16 text-white">
+                <div class="container mx-auto px-4">
+                    <div class="max-w-2xl mx-auto bg-white text-slate-800 rounded-xl shadow-2xl overflow-hidden">
+                        
+                        <div class="bg-brand-primary p-6 text-center">
+                            <h2 class="text-2xl font-bold text-white">Free Vulnerability Assessment</h2>
+                            <p class="text-blue-100 text-sm">Discover your risk score in 2 minutes.</p>
+                        </div>
+
+                        <div id="quiz-step-1" class="p-10 text-center">
+                            <div class="mb-6">
+                                <i class="fa-solid fa-clipboard-question text-6xl text-brand-accent"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-4">Let's check your security posture.</h3>
+                            <p class="text-gray-600 mb-8">We will ask 6 simple questions to assess your business risk level and preparedness.</p>
+                            <button onclick="nextQuizStep(2)" class="bg-brand-primary hover:bg-blue-600 text-white px-8 py-3 rounded-lg font-bold w-full md:w-auto transition">Start Quiz</button>
+                        </div>
+
+                        <div id="quiz-step-2" class="p-10 hidden">
+                            <div class="flex justify-between text-xs text-gray-400 mb-4"><span>Question 1 of 6</span><span>16%</span></div>
+                            <div class="h-2 bg-gray-200 rounded-full mb-6"><div class="h-2 bg-brand-primary rounded-full w-1/6"></div></div>
+                            
+                            <h3 class="text-lg font-bold mb-6">Are you looking for protection for:</h3>
+                            <div class="space-y-4">
+                                <div onclick="selectQuizOption(this)" class="quiz-option border-2 border-gray-200 p-4 rounded-lg cursor-pointer flex items-center">
+                                    <i class="fa-solid fa-house text-gray-400 mr-4"></i> Personal / Home Use
+                                </div>
+                                <div onclick="selectQuizOption(this)" class="quiz-option border-2 border-gray-200 p-4 rounded-lg cursor-pointer flex items-center">
+                                    <i class="fa-solid fa-briefcase text-gray-400 mr-4"></i> Small Business (1-50 employees)
+                                </div>
+                            </div>
+                            <button onclick="nextQuizStep(3)" class="mt-8 bg-brand-dark text-white px-6 py-2 rounded-lg float-right">Next <i class="fa-solid fa-arrow-right ml-2"></i></button>
+                        </div>
+
+                        <div id="quiz-step-3" class="p-10 hidden">
+                            <div class="flex justify-between text-xs text-gray-400 mb-4"><span>Question 2 of 6</span><span>33%</span></div>
+                            <div class="h-2 bg-gray-200 rounded-full mb-6"><div class="h-2 bg-brand-primary rounded-full w-2/6"></div></div>
+                            
+                            <h3 class="text-lg font-bold mb-6">Do you use Multi-Factor Authentication (MFA/2FA) on your email?</h3>
+                            <p class="text-xs text-gray-500 mb-4">Tip: This is when you need a code from your phone to log in.</p>
+                            <div class="space-y-4">
+                                <div onclick="selectQuizOption(this)" class="quiz-option border-2 border-gray-200 p-4 rounded-lg cursor-pointer">Yes, on everything.</div>
+                                <div onclick="selectQuizOption(this)" class="quiz-option border-2 border-gray-200 p-4 rounded-lg cursor-pointer">Sometimes / Not sure.</div>
+                                <div onclick="selectQuizOption(this)" class="quiz-option border-2 border-gray-200 p-4 rounded-lg cursor-pointer">No, never.</div>
+                            </div>
+                            <button onclick="nextQuizStep(4)" class="mt-8 bg-brand-dark text-white px-6 py-2 rounded-lg float-right">Next <i class="fa-solid fa-arrow-right ml-2"></i></button>
+                        </div>
+
+                        <div id="quiz-step-4" class="p-10 hidden">
+                            <div class="flex justify-between text-xs text-gray-400 mb-4"><span>Question 3 of 6</span><span>50%</span></div>
+                            <div class="h-2 bg-gray-200 rounded-full mb-6"><div class="h-2 bg-brand-primary rounded-full w-3/6"></div></div>
+                            
+                            <h3 class="text-lg font-bold mb-6">How often do you back up your critical data?</h3>
+                            <div class="space-y-4">
+                                <div onclick="selectQuizOption(this)" class="quiz-option border-2 border-gray-200 p-4 rounded-lg cursor-pointer">Automatically (Daily/Weekly)</div>
+                                <div onclick="selectQuizOption(this)" class="quiz-option border-2 border-gray-200 p-4 rounded-lg cursor-pointer">Once a month or less</div>
+                                <div onclick="selectQuizOption(this)" class="quiz-option border-2 border-gray-200 p-4 rounded-lg cursor-pointer">I don't have backups</div>
+                            </div>
+                            <button onclick="nextQuizStep(5)" class="mt-8 bg-brand-dark text-white px-6 py-2 rounded-lg float-right">Next <i class="fa-solid fa-arrow-right ml-2"></i></button>
+                        </div>
+
+                         <div id="quiz-step-5" class="p-10 hidden">
+                            <div class="flex justify-between text-xs text-gray-400 mb-4"><span>Question 4 of 6</span><span>66%</span></div>
+                            <div class="h-2 bg-gray-200 rounded-full mb-6"><div class="h-2 bg-brand-primary rounded-full w-4/6"></div></div>
+                            
+                            <h3 class="text-lg font-bold mb-6">How do you manage your passwords?</h3>
+                            <div class="space-y-4">
+                                <div onclick="selectQuizOption(this)" class="quiz-option border-2 border-gray-200 p-4 rounded-lg cursor-pointer">I use a Password Manager (LastPass, 1Password, etc.)</div>
+                                <div onclick="selectQuizOption(this)" class="quiz-option border-2 border-gray-200 p-4 rounded-lg cursor-pointer">I write them down in a notebook or spreadsheet</div>
+                                <div onclick="selectQuizOption(this)" class="quiz-option border-2 border-gray-200 p-4 rounded-lg cursor-pointer">I use the same password for most things</div>
+                            </div>
+                            <button onclick="nextQuizStep(6)" class="mt-8 bg-brand-dark text-white px-6 py-2 rounded-lg float-right">Next <i class="fa-solid fa-arrow-right ml-2"></i></button>
+                        </div>
+
+                        <div id="quiz-step-6" class="p-10 hidden">
+                            <div class="flex justify-between text-xs text-gray-400 mb-4"><span>Question 5 of 6</span><span>83%</span></div>
+                            <div class="h-2 bg-gray-200 rounded-full mb-6"><div class="h-2 bg-brand-primary rounded-full w-5/6"></div></div>
+                            
+                            <h3 class="text-lg font-bold mb-6">Do employees receive cybersecurity training?</h3>
+                            <div class="space-y-4">
+                                <div onclick="selectQuizOption(this)" class="quiz-option border-2 border-gray-200 p-4 rounded-lg cursor-pointer">Yes, regular phishing simulations and training</div>
+                                <div onclick="selectQuizOption(this)" class="quiz-option border-2 border-gray-200 p-4 rounded-lg cursor-pointer">Once a year / During onboarding only</div>
+                                <div onclick="selectQuizOption(this)" class="quiz-option border-2 border-gray-200 p-4 rounded-lg cursor-pointer">No formal training</div>
+                            </div>
+                            <button onclick="nextQuizStep(7)" class="mt-8 bg-brand-dark text-white px-6 py-2 rounded-lg float-right">Next <i class="fa-solid fa-arrow-right ml-2"></i></button>
+                        </div>
+
+                        <div id="quiz-step-7" class="p-10 hidden">
+                            <div class="flex justify-between text-xs text-gray-400 mb-4"><span>Question 6 of 6</span><span>95%</span></div>
+                            <div class="h-2 bg-gray-200 rounded-full mb-6"><div class="h-2 bg-brand-primary rounded-full w-full"></div></div>
+                            
+                            <h3 class="text-lg font-bold mb-6">Do you use a firewall or VPN for remote access?</h3>
+                            <div class="space-y-4">
+                                <div onclick="selectQuizOption(this)" class="quiz-option border-2 border-gray-200 p-4 rounded-lg cursor-pointer">Yes, we have a managed firewall and business VPN</div>
+                                <div onclick="selectQuizOption(this)" class="quiz-option border-2 border-gray-200 p-4 rounded-lg cursor-pointer">I think the router has one built in</div>
+                                <div onclick="selectQuizOption(this)" class="quiz-option border-2 border-gray-200 p-4 rounded-lg cursor-pointer">I don't know</div>
+                            </div>
+                            <button onclick="nextQuizStep(8)" class="mt-8 bg-brand-dark text-white px-6 py-2 rounded-lg float-right">See Results <i class="fa-solid fa-check ml-2"></i></button>
+                        </div>
+
+                        <div id="quiz-step-8" class="p-10 hidden text-center">
+                            <div class="w-20 h-20 bg-orange-100 rounded-full mx-auto mb-6 flex items-center justify-center">
+                                <i class="fa-solid fa-triangle-exclamation text-3xl text-orange-500"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-2">Your Risk Score: <span class="text-orange-500">MEDIUM - HIGH</span></h3>
+                            <p class="text-gray-600 mb-6">Your answers indicate gaps in password hygiene, employee training, or network security. This makes you a prime target for ransomware.</p>
+                            
+                            <div class="bg-slate-50 p-6 rounded-lg mb-6 border border-slate-200 text-left">
+                                <h4 class="font-bold text-sm uppercase text-gray-500 mb-2">Recommended Action Plan:</h4>
+                                <ul class="text-sm space-y-2">
+                                    <li class="flex items-center"><i class="fa-solid fa-check-circle text-brand-primary mr-2"></i> <strong>Immediate:</strong> Implement a Password Manager.</li>
+                                    <li class="flex items-center"><i class="fa-solid fa-check-circle text-brand-primary mr-2"></i> Start quarterly phishing simulations for staff.</li>
+                                    <li class="flex items-center"><i class="fa-solid fa-check-circle text-brand-primary mr-2"></i> <strong>Consult CyberGuard Pro for a Firewall audit.</strong></li>
+                                </ul>
+                            </div>
+
+                            <div class="space-y-3">
+                                <button onclick="sendQuizResults()" class="w-full bg-brand-primary text-white font-bold py-3 rounded-lg hover:bg-blue-600 transition flex items-center justify-center">
+                                    <i class="fa-solid fa-envelope mr-2"></i> Email Results to Myself
+                                </button>
+                                <p class="text-xs text-gray-400 mt-2">This will open your default email client with the report.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="resources" class="page-section">
+            <div class="bg-white py-16">
+                <div class="container mx-auto px-4">
+                    <h2 id="knowledge-base" class="text-3xl font-bold text-brand-dark mb-10 text-center">Security Knowledge Center</h2>
+                    
+                    <div id="latest-threats" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <article class="border rounded-lg overflow-hidden hover:shadow-lg transition bg-white scroll-mt-24">
+                            <div class="h-48 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cybersecurity Matrix" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-6">
+                                <span class="text-xs font-bold text-brand-primary uppercase">Trend Alert</span>
+                                <h3 class="text-xl font-bold mt-2 mb-3">Top Cyber Risks (CISA Report)</h3>
+                                <p class="text-gray-600 text-sm mb-4">Official insights from the Cybersecurity & Infrastructure Security Agency on 2025 threats.</p>
+                                <a href="https://www.cisa.gov/topics/cyber-threats-and-advisories" target="_blank" class="text-brand-primary font-bold text-sm hover:underline">Read on CISA.gov -></a>
+                            </div>
+                        </article>
+
+                        <article class="border rounded-lg overflow-hidden hover:shadow-lg transition bg-white">
+                            <div class="h-48 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Digital Lock" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-6">
+                                <span class="text-xs font-bold text-brand-primary uppercase">Education</span>
+                                <h3 class="text-xl font-bold mt-2 mb-3">Cybersecurity for Small Business</h3>
+                                <p class="text-gray-600 text-sm mb-4">Learn how to spot and avoid the most common scams targeting small businesses from the FTC's main hub.</p>
+                                <a href="https://www.ftc.gov/business-guidance/small-businesses/cybersecurity" target="_blank" class="text-brand-primary font-bold text-sm hover:underline">Read on FTC.gov -></a>
+                            </div>
+                        </article>
+
+                        <article class="border rounded-lg overflow-hidden hover:shadow-lg transition bg-white">
+                            <div class="h-48 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Hacker Code" class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-6">
+                                <span class="text-xs font-bold text-brand-primary uppercase">Case Study</span>
+                                <h3 class="text-xl font-bold mt-2 mb-3">Cybersecurity for Small Business</h3>
+                                <p class="text-gray-600 text-sm mb-4">Why small businesses are the new favorite target for hackers and how to stop them.</p>
+                                <a href="https://www.fcc.gov/communications-business-opportunities/cybersecurity-small-businesses" target="_blank" class="text-brand-primary font-bold text-sm hover:underline">Read FCC Guide -></a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="quote" class="page-section">
+            <div class="bg-slate-50 py-16">
+                <div class="container mx-auto px-4 max-w-2xl">
+                    <div class="bg-white rounded-xl shadow-xl p-8">
+                        <h2 class="text-2xl font-bold text-brand-dark mb-2 text-center">Service Estimator</h2>
+                        <p class="text-center text-gray-500 mb-8">Get a ballpark figure for your business security.</p>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-2">Number of Devices (Computers/Servers)</label>
+                                <input type="number" id="deviceCount" min="1" value="1" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary outline-none">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-2">Industry Compliance Needs</label>
+                                <select id="compliance" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary outline-none">
+                                    <option value="0">None / Standard</option>
+                                    <option value="100">Healthcare (HIPAA)</option>
+                                    <option value="150">Finance (SOC2/PCI)</option>
+                                </select>
+                            </div>
+
+                            <button onclick="calculateQuote()" class="w-full bg-brand-dark text-white font-bold py-3 rounded-lg hover:bg-slate-700 transition">Calculate Estimate</button>
+
+                            <div id="quoteResult" class="hidden bg-blue-50 border border-blue-200 rounded-lg p-6 text-center mt-6">
+                                <p class="text-gray-600 text-sm">Estimated Monthly Cost</p>
+                                <p class="text-3xl font-bold text-brand-primary my-2" id="quotePrice">$0</p>
+                                <p class="text-xs text-gray-500">Includes 24/7 Monitoring & Antivirus. <a href="#" onclick="navigateTo('contact')" class="underline text-brand-primary">Contact us to finalize</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="page-section">
+            <div class="bg-white py-16">
+                <div class="container mx-auto px-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                        <div>
+                            <h2 class="text-3xl font-bold text-brand-dark mb-6">Let's Secure Your Business.</h2>
+                            <p class="text-gray-600 mb-8">Have questions? Ready to start? Fill out the form and our Incident Response team will get back to you within 24 hours.</p>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-start">
+                                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center text-red-600 mr-4">
+                                        <i class="fa-solid fa-phone-volume text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">IT Emergency?</h4>
+                                        <p class="text-sm text-gray-600">Call our 24/7 Hotline: <span class="font-bold text-brand-dark">(555) 019-2834</span></p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-brand-primary mr-4">
+                                        <i class="fa-solid fa-envelope text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Email Us</h4>
+                                        <p class="text-sm text-gray-600">support@cyberguardpro.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-50 p-8 rounded-xl shadow-lg">
+                            <form onsubmit="handleContactSubmit(event)">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">First Name</label>
+                                        <input type="text" required class="w-full p-3 border border-gray-300 rounded focus:border-brand-primary outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Last Name</label>
+                                        <input type="text" required class="w-full p-3 border border-gray-300 rounded focus:border-brand-primary outline-none">
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Company Name</label>
+                                    <input type="text" class="w-full p-3 border border-gray-300 rounded focus:border-brand-primary outline-none">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Email Address</label>
+                                    <input type="email" required class="w-full p-3 border border-gray-300 rounded focus:border-brand-primary outline-none">
+                                </div>
+                                <div class="mb-6">
+                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Message</label>
+                                    <textarea rows="4" required class="w-full p-3 border border-gray-300 rounded focus:border-brand-primary outline-none"></textarea>
+                                </div>
+                                <button type="submit" class="w-full bg-brand-primary text-white font-bold py-3 rounded hover:bg-blue-600 transition">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="careers" class="page-section">
+            <div class="bg-white py-16">
+                <div class="container mx-auto px-4 max-w-4xl">
+                    <h2 class="text-3xl font-bold text-brand-dark mb-4 text-center">Join Our Mission</h2>
+                    <p class="text-center text-gray-600 mb-12">Help us build a safer digital future for everyone.</p>
+
+                    <div class="space-y-6">
+                        <div class="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition flex flex-col md:flex-row justify-between items-center">
+                            <div class="mb-4 md:mb-0">
+                                <h3 class="font-bold text-xl text-brand-dark">Junior Security Analyst</h3>
+                                <p class="text-gray-500 text-sm">Nashville, TN • Full-time</p>
+                            </div>
+                            <button onclick="openJobApp('Junior Security Analyst')" class="bg-brand-light text-brand-primary font-bold px-6 py-2 rounded border border-brand-primary hover:bg-brand-primary hover:text-white transition">Apply Now</button>
+                        </div>
+
+                         <div class="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition flex flex-col md:flex-row justify-between items-center">
+                            <div class="mb-4 md:mb-0">
+                                <h3 class="font-bold text-xl text-brand-dark">Sales Development Representative</h3>
+                                <p class="text-gray-500 text-sm">Remote • Full-time</p>
+                            </div>
+                            <button onclick="openJobApp('Sales Development Representative')" class="bg-brand-light text-brand-primary font-bold px-6 py-2 rounded border border-brand-primary hover:bg-brand-primary hover:text-white transition">Apply Now</button>
+                        </div>
+
+                        <div class="bg-blue-50 p-6 rounded-lg text-center mt-8">
+                            <h4 class="font-bold text-brand-dark mb-2">Don't see your role?</h4>
+                            <p class="text-sm text-gray-600 mb-4">We are always looking for talented individuals. Send us your resume.</p>
+                            <button onclick="navigateTo('hr-contact')" class="text-brand-primary font-bold underline">Contact HR</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="job-application" class="page-section">
+            <div class="bg-white py-16">
+                <div class="container mx-auto px-4 max-w-2xl">
+                    <div class="mb-8">
+                        <button onclick="navigateTo('careers')" class="text-gray-500 hover:text-brand-primary text-sm mb-4"><i class="fa-solid fa-arrow-left"></i> Back to Careers</button>
+                        <h2 class="text-3xl font-bold text-brand-dark">Job Application</h2>
+                        <p class="text-brand-primary font-medium" id="job-title-display">Position: General Application</p>
+                    </div>
+
+                    <div class="bg-slate-50 p-8 rounded-xl shadow-lg border border-slate-200">
+                        <form onsubmit="handleJobSubmit(event)">
+                            <input type="hidden" id="app-position" value="">
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">First Name</label>
+                                    <input type="text" required class="w-full p-3 border border-gray-300 rounded focus:border-brand-primary outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Last Name</label>
+                                    <input type="text" required class="w-full p-3 border border-gray-300 rounded focus:border-brand-primary outline-none">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Email</label>
+                                <input type="email" required class="w-full p-3 border border-gray-300 rounded focus:border-brand-primary outline-none">
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">LinkedIn Profile (URL)</label>
+                                <input type="url" class="w-full p-3 border border-gray-300 rounded focus:border-brand-primary outline-none" placeholder="https://linkedin.com/in/...">
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Resume / CV</label>
+                                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center bg-white">
+                                    <i class="fa-solid fa-cloud-arrow-up text-3xl text-gray-400 mb-2"></i>
+                                    <p class="text-sm text-gray-500">Click to upload or drag and drop</p>
+                                    <input type="file" class="mt-2 text-sm text-gray-500 mx-auto w-full max-w-xs">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="w-full bg-brand-primary text-white font-bold py-3 rounded hover:bg-blue-600 transition">Submit Application</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="hr-contact" class="page-section">
+            <div class="bg-white py-16">
+                <div class="container mx-auto px-4 max-w-2xl">
+                    <div class="mb-8">
+                        <button onclick="navigateTo('careers')" class="text-gray-500 hover:text-brand-primary text-sm mb-4"><i class="fa-solid fa-arrow-left"></i> Back to Careers</button>
+                        <h2 class="text-3xl font-bold text-brand-dark">Human Resources Inquiry</h2>
+                        <p class="text-gray-600">Contact our HR department for payroll, benefits, or verification of employment.</p>
+                    </div>
+
+                    <div class="bg-slate-50 p-8 rounded-xl shadow-lg border border-slate-200">
+                        <form onsubmit="handleHRSubmit(event)">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">First Name</label>
+                                    <input type="text" required class="w-full p-3 border border-gray-300 rounded focus:border-brand-primary outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Last Name</label>
+                                    <input type="text" required class="w-full p-3 border border-gray-300 rounded focus:border-brand-primary outline-none">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Work Email / Contact Email</label>
+                                <input type="email" required class="w-full p-3 border border-gray-300 rounded focus:border-brand-primary outline-none">
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Inquiry Topic</label>
+                                <select class="w-full p-3 border border-gray-300 rounded focus:border-brand-primary outline-none">
+                                    <option>Recruitment Question</option>
+                                    <option>Payroll / Benefits</option>
+                                    <option>Verification of Employment</option>
+                                    <option>Internal Report</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Message</label>
+                                <textarea rows="4" required class="w-full p-3 border border-gray-300 rounded focus:border-brand-primary outline-none"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-brand-dark text-white font-bold py-3 rounded hover:bg-slate-700 transition">Submit HR Inquiry</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-brand-dark text-slate-400 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 border-b border-slate-700 pb-8">
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">CyberGuard Pro</h3>
+                    <p class="text-sm">Safeguarding businesses from the evolving landscape of digital threats.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" onclick="navigateTo('about')" class="hover:text-white">About Us</a></li>
+                        <li><a href="#" onclick="navigateTo('careers')" class="hover:text-white">Careers</a></li>
+                        <li><a href="#" onclick="navigateTo('resources')" class="hover:text-white">Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Services</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" onclick="navigateTo('services')" class="hover:text-white">Personal Security</a></li>
+                        <li><a href="#" onclick="navigateTo('services')" class="hover:text-white">SMB Protection</a></li>
+                        <li><a href="#" onclick="navigateTo('services')" class="hover:text-white">Enterprise Solutions</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Stay Safe</h4>
+                    <button onclick="navigateTo('quiz')" class="bg-brand-accent text-white text-xs font-bold px-4 py-2 rounded hover:bg-blue-400">Take Security Quiz</button>
+                </div>
+            </div>
+            <div class="text-center text-xs">
+                &copy; 2025 CyberGuard Pro LLC. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
