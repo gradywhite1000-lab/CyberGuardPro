@@ -39,19 +39,3 @@ This repository contains the files for the comprehensive redesign and overhaul o
 * Nolan White
 
 ---
-
-## 💻 Refined Code Snippets for Slides
-
-Here are the specific, short code blocks you should use for **Slides 7 and 8**. These are direct, impactful, and easy for you to locate.
-
-### Slide 7: Execution: Simplifying the Message
-
-| Code Snippet | File | Purpose |
-| :--- | :--- | :--- |
-| **Snippet A: Core Value Prop** | `index.html` | Highlights the non-technical, simple messaging. |
-| **Snippet B: Tailwind Setup** | `style.css` | Demonstrates the commitment to a clean, modern, and structured design (using a framework). |
-
-```html
-<h1>Cybersecurity Made Simple.</h1>
-<p>Trusted by All.</p>
-<p>Protect your family, business, and data — without the tech headache.</p>
