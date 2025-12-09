@@ -34,7 +34,7 @@ This repository contains the files for the comprehensive redesign and overhaul o
 
 ## Project Team
 
-* Bow Shafer
+* Bow Schafer
 * Hannah Worstell
 * Nolan White
 
